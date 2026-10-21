@@ -1,0 +1,109 @@
+<EditForm Model="Order" OnValidSubmit="Order.Send">
+    <ModelValidator Validator="Order.Validator" @ref="Order.ModelValidatorComponentReference" />
+    <ValidationSummary />
+
+    <div class="container-fluid">
+        <h2 class="mb-4">Punto de Venta</h2>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card shadow-sm p-3">
+                    <h4>Cliente</h4>
+                    <label class="form-label">Identificación del cliente</label>
+                    <div class="input-group"><InputText class="form-control" @bind-Value="Order.CustomerId" /><button type="button" class="btn btn-outline-primary" @onclick="OpenCustomerModalAsync">Buscar</button></div>
+                    <ValidationMessage For="() => Order.CustomerId" />
+                    <label class="form-label mt-3">Dirección</label>
+                    <InputText class="form-control" @bind-Value="Order.ShipAddress" />
+                    <label class="form-label mt-3">Ciudad</label>
+                    <InputText class="form-control" @bind-Value="Order.ShipCity" />
+                    <label class="form-label mt-3">País</label>
+                    <InputText class="form-control" @bind-Value="Order.ShipCountry" />
+                    <label class="form-label mt-3">Código postal</label>
+                    <InputText class="form-control" @bind-Value="Order.ShipPostalCode" />
+                </div>
+
+                <div class="card shadow-sm p-3 mt-3">
+                    <h4>Resumen de factura</h4>
+                    <div class="d-flex justify-content-between"><span>Subtotal:</span><strong>@Order.Subtotal.ToString("C2")</strong></div>
+                    <div class="d-flex justify-content-between"><span>IVA (15%):</span><strong>@Order.VatAmount.ToString("C2")</strong></div>
+                    <hr />
+                    <div class="d-flex justify-content-between fs-4"><span>Total:</span><strong>@Order.TotalAmount.ToString("C2")</strong></div>
+                    <button class="btn btn-success w-100 mt-3" type="submit">Guardar y facturar</button>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card shadow-sm p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4>Productos disponibles</h4>
+                        <span class="badge bg-success">Stock mayor que cero</span>
+                    </div>
+                    <div class="input-group my-3">
+                        <button type="button" class="btn btn-outline-primary" @onclick="OpenProductModalAsync">Buscar producto</button>
+                        <select class="form-select" @bind="SelectedProductId">
+                            <option value="0">Seleccione un producto</option>
+                            @foreach (var product in Order.AvailableProducts)
+                            {
+                                <option value="@product.Id">@product.Name - @product.UnitPrice.ToString("C2") (stock: @product.UnitsInStock)</option>
+                            }
+                        </select>
+                        <button type="button" class="btn btn-primary" @onclick="AddSelectedProduct">Agregar</button>
+                    </div>
+
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Order.OrderDetails)
+                            {
+                                var product = Order.AvailableProducts.FirstOrDefault(p => p.Id == item.ProductId);
+                                <tr>
+                                    <td><div>@(product?.Name ?? $"Producto {item.ProductId}")</div><select class="form-select form-select-sm mt-1" @onchange='eventArgs => ReplaceProduct(item, int.Parse(eventArgs.Value?.ToString() ?? "0"))'><option value="0">Cambiar producto...</option>@foreach (var available in Order.AvailableProducts.Where(p => p.Id != item.ProductId)) { <option value="@available.Id">@available.Name</option> }</select></td>
+                                    <td>@item.UnitPrice.ToString("C2")</td>
+                                    <td style="max-width: 120px">
+                                        <InputNumber class="form-control" min="1" @bind-Value="item.Quantity" />
+                                    </td>
+                                    <td>@((item.UnitPrice * item.Quantity).ToString("C2"))</td>
+                                    <td><button type="button" class="btn btn-outline-danger btn-sm" @onclick="() => Order.RemoveProduct(item)">Eliminar</button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (Order.OrderDetails.Count == 0)
+                    {
+                        <p class="text-muted text-center">Agregue al menos un producto a la orden.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Order.InformationMessage))
+    {
+        <div class="alert alert-info mt-3">@Order.InformationMessage</div>
+    }
+
+    @if (CustomerModalVisible)
+    {
+        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.45)">
+            <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5>Buscar cliente</h5><button type="button" class="btn-close" @onclick="() => CustomerModalVisible = false"></button></div>
+                <div class="modal-body"><div class="row g-2"><div class="col"><InputText class="form-control" placeholder="Id" @bind-Value="CustomerIdSearch" /></div><div class="col"><InputText class="form-control" placeholder="Nombre" @bind-Value="CustomerNameSearch" /></div><div class="col-auto"><button class="btn btn-primary" @onclick="SearchCustomersAsync">Buscar</button></div></div>
+                    <table class="table mt-3"><thead><tr><th>Id</th><th>Nombre</th><th></th></tr></thead><tbody>@foreach (var customer in CustomerResults) { <tr><td>@customer.Id</td><td>@customer.Name</td><td><button class="btn btn-sm btn-success" @onclick="() => SelectCustomer(customer)">Seleccionar</button></td></tr> }</tbody></table></div></div></div>
+        </div>
+    }
+
+    @if (ProductModalVisible)
+    {
+        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.45)">
+            <div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5>Buscar producto</h5><button type="button" class="btn-close" @onclick="() => ProductModalVisible = false"></button></div>
+                <div class="modal-body"><div class="input-group"><InputText class="form-control" placeholder="Nombre del producto" @bind-Value="ProductSearch" /><button class="btn btn-primary" @onclick="SearchProductsAsync">Buscar</button></div>
+                    <table class="table mt-3"><thead><tr><th>Producto</th><th>Precio</th><th>Stock</th><th></th></tr></thead><tbody>@foreach (var product in ProductResults) { <tr><td>@product.Name</td><td>@product.UnitPrice.ToString("C2")</td><td>@product.UnitsInStock</td><td><button class="btn btn-sm btn-success" @onclick="() => SelectProduct(product)">Agregar</button></td></tr> }</tbody></table></div></div></div>
+        </div>
+    }
+</EditForm>

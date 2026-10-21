@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "jVHmLi9sgig=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\enriq\\source\\repos\\NorthWind-POS\\NorthWind\\3. Interface Adapters\\Gateways\\Repositories\\NorthWind.Sales.Backend.Repositories\\NorthWind.Sales.Backend.Repositories.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.12\\microsoft.extensions.dependencyinjection.abstractions.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

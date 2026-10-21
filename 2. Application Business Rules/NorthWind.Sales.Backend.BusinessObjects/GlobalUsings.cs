@@ -1,0 +1,15 @@
+global using NorthWind.Sales.Backend.BusinessObjects.Aggregates;
+global using NorthWind.Sales.Backend.BusinessObjects.Enums;
+global using NorthWind.Entities.Interfaces;
+global using NorthWind.Sales.Backend.BusinessObjects.Interfaces.CreateOrder;
+global using NorthWind.Sales.Backend.BusinessObjects.Interfaces.Repositories;
+global using NorthWind.Sales.Backend.BusinessObjects.POCOEntities;
+global using NorthWind.Sales.Backend.BusinessObjects.ValueObjects;
+global using NorthWind.Sales.Entities.Dtos.CreateOrder;
+global using NorthWind.Sales.Entities.Dtos;
+global using NorthWind.Validation.Entities.ValueObjects;
+global using NorthWind.Validation.Entities.Interfaces;
+global using NorthWind.Exceptions.Entities.Exceptions;
+global using NorthWind.Entities.Abstractions;
+global using System.Linq.Expressions;
+global using NorthWind.Sales.Backend.BusinessObjects.Specifications;

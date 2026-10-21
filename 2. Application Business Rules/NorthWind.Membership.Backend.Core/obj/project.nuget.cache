@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "ocaKwK2w+kg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\enriq\\source\\repos\\NorthWind-POS\\NorthWind\\2. Application Business Rules\\NorthWind.Membership.Backend.Core\\NorthWind.Membership.Backend.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.bcl.cryptography\\10.0.2\\microsoft.bcl.cryptography.10.0.2.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.23.0\\microsoft.identitymodel.abstractions.8.23.0.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.23.0\\microsoft.identitymodel.jsonwebtokens.8.23.0.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.identitymodel.logging\\8.23.0\\microsoft.identitymodel.logging.8.23.0.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.23.0\\microsoft.identitymodel.tokens.8.23.0.nupkg.sha512"
+  ],
+  "logs": []
+}

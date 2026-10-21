@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/NorthWind.RazorComponents/NorthWind.RazorComponents.4syds4wiwl.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.4syds4wiwl.bundle.scp.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"4syds4wiwl"},{"Name":"integrity","Value":"sha256-VJ3YbPruAglNKx0sbtxH8NHHV4GFGhpUoPUnofn42FU="},{"Name":"label","Value":"_content/NorthWind.RazorComponents/NorthWind.RazorComponents.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2307"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VJ3YbPruAglNKx0sbtxH8NHHV4GFGhpUoPUnofn42FU=\u0022"},{"Name":"Last-Modified","Value":"Tue, 20 Oct 2026 03:11:54 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/NorthWind.RazorComponents/NorthWind.RazorComponents.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.4syds4wiwl.bundle.scp.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-VJ3YbPruAglNKx0sbtxH8NHHV4GFGhpUoPUnofn42FU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2307"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VJ3YbPruAglNKx0sbtxH8NHHV4GFGhpUoPUnofn42FU=\u0022"},{"Name":"Last-Modified","Value":"Tue, 20 Oct 2026 03:11:54 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

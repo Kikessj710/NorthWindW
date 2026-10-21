@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Temporary for EF migration setup; re-enable NuGet audit after the database is initialized. -->
+    <NuGetAudit>false</NuGetAudit>
+  </PropertyGroup>
+</Project>

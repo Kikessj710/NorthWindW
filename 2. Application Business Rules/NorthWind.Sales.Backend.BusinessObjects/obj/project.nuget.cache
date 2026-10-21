@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KKEUXblU5n0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\enriq\\source\\repos\\NorthWind-POS\\NorthWind\\2. Application Business Rules\\NorthWind.Sales.Backend.BusinessObjects\\NorthWind.Sales.Backend.BusinessObjects.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.12\\microsoft.extensions.dependencyinjection.abstractions.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

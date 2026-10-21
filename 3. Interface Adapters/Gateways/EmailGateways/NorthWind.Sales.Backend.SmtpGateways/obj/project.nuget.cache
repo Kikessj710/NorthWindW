@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "+Ge5FX15n2A=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\enriq\\source\\repos\\NorthWind-POS\\NorthWind\\3. Interface Adapters\\Gateways\\EmailGateways\\NorthWind.Sales.Backend.SmtpGateways\\NorthWind.Sales.Backend.SmtpGateways.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.12\\microsoft.extensions.dependencyinjection.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.12\\microsoft.extensions.logging.abstractions.10.0.12.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.options\\10.0.12\\microsoft.extensions.options.10.0.12.nupkg.sha512",
+    "C:\\Users\\enriq\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.12\\microsoft.extensions.primitives.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,49 @@
+@page "/invoices"
+@attribute [Authorize]
+<PageTitle>Facturas</PageTitle>
+
+<div class="container-fluid invoice-search-page">
+    <h2>Facturas guardadas</h2>
+    <p class="text-muted">Busque por número de factura o por cliente.</p>
+    <div class="card shadow-sm p-3 mb-4">
+        <div class="row g-2">
+            <div class="col-md-3"><label class="form-label">Número</label><InputText class="form-control" @bind-Value="OrderIdFilter" /></div>
+            <div class="col-md-3"><label class="form-label">Cliente</label><InputText class="form-control" @bind-Value="CustomerIdFilter" /></div>
+            <div class="col-md-3 align-self-end"><button class="btn btn-primary" @onclick="SearchAsync">Buscar</button></div>
+        </div>
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Message)) { <div class="alert alert-info">@Message</div> }
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card shadow-sm p-3">
+                <h4>Resultados</h4>
+                <table class="table table-hover">
+                    <thead><tr><th>Número</th><th>Cliente</th><th>Fecha</th><th>Total</th></tr></thead>
+                    <tbody>
+                    @foreach (var item in Results)
+                    {
+                        <tr @onclick="() => SelectAsync(item.Id)" style="cursor:pointer">
+                            <td>@item.Id</td><td>@item.CustomerId</td><td>@item.OrderDate.ToShortDateString()</td><td>@item.TotalAmount.ToString("C2")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between"><button class="btn btn-outline-secondary" disabled="@(Page <= 1)" @onclick="PreviousPageAsync">Anterior</button><span>Página @Page</span><button class="btn btn-outline-secondary" disabled="@(Results.Count < 8)" @onclick="NextPageAsync">Siguiente</button></div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            @if (Invoice is not null)
+            {
+                <div class="card shadow-sm p-4 invoice-sheet">
+                    <div class="d-flex justify-content-between"><div><h3>Factura</h3><div>Número: <strong>@Invoice.Id</strong></div></div><div>Fecha: @Invoice.OrderDate.ToString("dd/MM/yyyy HH:mm")</div></div>
+                    <hr /><p><strong>Cliente:</strong> @Invoice.CustomerId</p><p><strong>Dirección:</strong> @Invoice.ShipAddress, @Invoice.ShipCity, @Invoice.ShipCountry</p>
+                    <table class="table"><thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Total</th></tr></thead><tbody>
+                    @foreach (var detail in Invoice.Details) { <tr><td>@detail.ProductName</td><td>@detail.UnitPrice.ToString("C2")</td><td>@detail.Quantity</td><td>@detail.LineTotal.ToString("C2")</td></tr> }
+                    </tbody></table>
+                    <div class="text-end"><div>Subtotal: @Invoice.Subtotal.ToString("C2")</div><div>IVA: @Invoice.VatAmount.ToString("C2")</div><h4>Total: @Invoice.TotalAmount.ToString("C2")</h4></div>
+                    <button class="btn btn-outline-primary mt-3" @onclick="PrintAsync">Imprimir / Guardar como PDF</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<EditForm Model="ViewModel" OnValidSubmit="ViewModel.Register">
+<ModelValidator Validator="ViewModel.Validator" @ref="ViewModel.ModelValidatorComponentReference" />
+<ValidationSummary />
+<div class="form-group"><label for="FirstName">Nombre</label><InputText id="FirstName" class="form-control" @bind-Value="ViewModel.FirstName" /><ValidationMessage For="@(()=>ViewModel.FirstName)" /></div>
+<div class="form-group"><label for="LastName">Apellidos</label><InputText id="LastName" class="form-control" @bind-Value="ViewModel.LastName" /><ValidationMessage For="@(()=>ViewModel.LastName)" /></div>
+<div class="form-group"><label for="Email">Correo</label><InputText id="Email" class="form-control" @bind-Value="ViewModel.Email" /><ValidationMessage For="@(()=>ViewModel.Email)" /></div>
+<div class="form-group"><label for="Password">Contraseña</label><InputText id="Password" class="form-control" type="password" @bind-Value="ViewModel.Password" /><ValidationMessage For="@(()=>ViewModel.Password)" /></div>
+<div class="form-group"><label for="PasswordConfirmation">Confirmar contraseña</label><InputText id="PasswordConfirmation" class="form-control" type="password" @bind-Value="ViewModel.PasswordConfirmation" /><ValidationMessage For="@(()=>ViewModel.PasswordConfirmation)" /></div>
+<button class="btn btn-primary mt-3">Registrar</button>
+</EditForm>
+@if (!string.IsNullOrWhiteSpace(ViewModel.InformationMessage)) { <div class="alert alert-info mt-3">@ViewModel.InformationMessage</div> }
+@code { [Parameter,EditorRequired] public UserRegistrationViewModel ViewModel {get;set;}=default!; }
